@@ -18,7 +18,18 @@ addGuestButton.addEventListener("click", function () {
         addToList(guest);
     }
     clearInput();
-    updateGustCount();
+    updateGuestCount();
+});
+
+document.addEventListener("keydown", function (e){
+    if(e.key==="Enter") {
+        const guest=guestInput.value;
+        if (guest!=="") {
+            addToList(guest);
+        }
+        clearInput();
+        updateGuestCount();
+    }
 });
 
 const clearInput=function () {
@@ -31,7 +42,7 @@ const addToList=function (guest) {
         guestList.append(listItem);
 };
 
-const updateGustCount=function() {
+const updateGuestCount=function() {
     const guests=document.querySelectorAll(".guest-list li");
     guestCount.innerText=guests.length
     if(guests.length===8) {
@@ -41,3 +52,7 @@ const updateGustCount=function() {
         guestFull.classList.remove("hide");
     }
 };
+
+
+// Enter keydown event added, but it screws up functionality for count 
+// and disabling guest list in updateGuestCount function... FIX IT!!!
