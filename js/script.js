@@ -63,7 +63,7 @@ const updateGuestCount=function() {
 const assignItems=function (){
     const potluckItems=["BBQ ribs", "potato salad", "chips", 
     "humus plate", "cookies", "fruit plate", "kale salad", "hamburgers",
-    "hot dogs", "chips and Salsa", "cookies", "pie"];
+    "hot dogs", "cheese platter", "pie"];
     
     const allGuests=document.querySelectorAll(".guest-list li");
     
