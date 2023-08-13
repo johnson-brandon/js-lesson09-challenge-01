@@ -11,6 +11,10 @@ const guestCount = document.querySelector(".attendance");
 // alert when guest list is full (not yet visible)
 const guestFull = document.querySelector(".alert");
 
+const assignButton=document.querySelector(".assign");
+const assignedItems=document.querySelector(".assigned-items");
+// console.log(assignButton, assignedItems);
+
 addGuestButton.addEventListener("click", function () {
     const guest=guestInput.value;
     // console.log(guest);
@@ -32,16 +36,19 @@ document.addEventListener("keydown", function (e){
     }
 });
 
+// CLEARS INPU FOR THE INVITE INPUT IN BOTH THE "ENTER" KEYDOWN AND CLICK EVENT LISTENERS
 const clearInput=function () {
     guestInput.value="";
 };
 
+// ADDS GUEST NAMES TO DOM
 const addToList=function (guest) {
     const listItem=document.createElement("li");
         listItem.innerText=guest;
         guestList.append(listItem);
 };
 
+//FUNCTIONALITY FOR GUEST COUNTER AND LIMITS LIST TO 8PPL
 const updateGuestCount=function() {
     const guests=document.querySelectorAll(".guest-list li");
     guestCount.innerText=guests.length
@@ -53,6 +60,27 @@ const updateGuestCount=function() {
     }
 };
 
+const assignItems=function (){
+    const potluckItems=["BBQ ribs", "potato salad", "chips", 
+    "humus plate", "cookies", "fruit plate", "kale salad", "hamburgers",
+    "hot dogs", "chips and Salsa", "cookies", "pie"];
+    
+    const allGuests=document.querySelectorAll(".guest-list li");
+    
+    for(let guest of allGuests) {
+        let randomPotluckIndex=Math.floor(Math.random()*potluckItems.length);
+        let randomPotluckItem=potluckItems[randomPotluckIndex];
 
-// Enter keydown event added, but it screws up functionality for count 
-// and disabling guest list in updateGuestCount function... FIX IT!!!
+        const listItem=document.createElement("li");
+        listItem.innerText=`${guest.innerText} is bringing ${randomPotluckItem}.`;
+        assignedItems.append(listItem);
+        potluckItems.splice(randomPotluckIndex, 1);
+    }
+};  
+
+assignButton.addEventListener("click", function (){
+    assignItems();
+    assignButton.disabled=true;
+});
+
+//Math.floor(Math.random() * potluckItems.length);
